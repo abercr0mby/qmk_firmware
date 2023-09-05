@@ -16,7 +16,7 @@ enum {
     CT_J_7,
     CT_K_8,
     CT_L_9,
-    CT_QUOT_0,
+    CT_SCLN_0,
     CT_Q_EXLM,
     CT_W_AT,
     CT_E_HASH,
@@ -37,7 +37,9 @@ enum {
     CT_M_LBRC,
     CT_COMMA_RBRC,
     CT_DOT_LCBR,
-    CT_SLASH_RCBR
+    CT_SLASH_RCBR,
+    CT_MINUS_UNDS,
+    CT_QUOT_DQT
 };
 
 typedef struct {
@@ -51,6 +53,7 @@ void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
     tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
 
     if (state->pressed) {
+
         if (state->count == 1
 #ifndef PERMISSIVE_HOLD
             && !state->interrupted
@@ -74,7 +77,7 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
     }
 }
 
-#define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
+ #define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
 
 
@@ -88,7 +91,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [CT_J_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_J, KC_7),
     [CT_K_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_K, KC_8),
     [CT_L_9] = ACTION_TAP_DANCE_TAP_HOLD(KC_L, KC_9),
-    [CT_QUOT_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_QUOT, KC_0),
+    [CT_SCLN_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_SCLN, KC_0),
     [CT_Q_EXLM] = ACTION_TAP_DANCE_TAP_HOLD(KC_Q, KC_EXLM),
     [CT_W_AT] = ACTION_TAP_DANCE_TAP_HOLD(KC_W, KC_AT),
     [CT_E_HASH] = ACTION_TAP_DANCE_TAP_HOLD(KC_E, KC_HASH),
@@ -108,26 +111,15 @@ tap_dance_action_t tap_dance_actions[] = {
     [CT_M_LBRC] = ACTION_TAP_DANCE_TAP_HOLD(KC_M, KC_LBRC),
     [CT_COMMA_RBRC] = ACTION_TAP_DANCE_TAP_HOLD(KC_COMMA, KC_RBRC),
     [CT_DOT_LCBR] = ACTION_TAP_DANCE_TAP_HOLD(KC_DOT, KC_LCBR),
-    [CT_SLASH_RCBR] = ACTION_TAP_DANCE_TAP_HOLD(KC_SLASH, KC_RCBR)
+    [CT_SLASH_RCBR] = ACTION_TAP_DANCE_TAP_HOLD(KC_SLASH, KC_RCBR),
+    [CT_MINUS_UNDS] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINUS, KC_UNDS),
+    [CT_QUOT_DQT] = ACTION_TAP_DANCE_TAP_HOLD(KC_QUOT, KC_DQT)
 };
 
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[0] = LAYOUT(KC_ESC, TD(CT_Q_EXLM), TD(CT_W_AT), TD(CT_E_HASH), TD(CT_R_DLR), TD(CT_T_PERC), TD(CT_Y_CIRC), TD(CT_U_AMPR), TD(CT_I_ASTR), TD(CT_O_LPRN), TD(CT_P_RPRN), KC_BSPC, KC_TAB, TD(CT_A_1), TD(CT_S_2), TD(CT_D_3), TD(CT_F_4), TD(CT_G_5), TD(CT_H_6), TD(CT_J_7), TD(CT_K_8), TD(CT_L_9), TD(CT_QUOT_0), KC_ENT, KC_LSFT, TD(CT_Z_PLUS), TD(CT_X_MINUS), TD(CT_C_SLASH), TD(CT_V_ASTR), TD(CT_B_EQUAL), TD(CT_N_PERC), TD(CT_M_LBRC), TD(CT_COMMA_RBRC), TD(CT_DOT_LCBR), TD(CT_SLASH_RCBR), KC_RSFT, KC_LCTL, KC_LGUI, LALT_T(KC_UNDS), LT(2,KC_SPC), LT(2,KC_SPC), LT(3,KC_NUBS), LT(4,KC_NUHS), DF(1), KC_NO),
-    [1] = LAYOUT( /* Simple base */
-		KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-		KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-		KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
-		KC_LCTL, KC_LGUI, KC_LALT,     KC_SPC, KC_SPC, MO(3), MO(4), DF(0), KC_QUOT),
-	[2] = LAYOUT(KC_ESC, KC_NO, KC_BTN1, KC_MS_U, KC_BTN2, KC_NO, KC_NO, KC_DEL, KC_UP, KC_BSPC, KC_NO, KC_DEL, KC_NO, KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END, KC_ENT, KC_LSFT, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_NO, KC_NO, KC_PGUP, KC_PGDN, KC_DEL, KC_UP, KC_BSPC, KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_RGHT),
-	[3] = LAYOUT(KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_SCLN''''''''''''''', KC_NO, KC_NO, KC_PPLS, KC_PMNS, KC_ASTR, KC_PSLS, KC_EQL, KC_PERC, KC_NO, KC_NO, KC_DOT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_UNDS, KC_UNDS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO),
-	[4] = LAYOUT(RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, RGB_RMOD, RGB_MOD, RGB_TOG, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SPD, RGB_SPI, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_HUD, RGB_HUI, RGB_VAD, RGB_VAI, KC_VOLU, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_VOLD)
-};
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    tap_dance_action_t *action;
-
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+
         case TD(CT_A_1):  // list all tap dance keycodes with tap-hold configurations
         case TD(CT_S_2):
         case TD(CT_D_3):
@@ -137,7 +129,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TD(CT_J_7):
         case TD(CT_K_8):
         case TD(CT_L_9):
-        case TD(CT_QUOT_0):
+        case TD(CT_SCLN_0):
         case TD(CT_Q_EXLM):
         case TD(CT_W_AT):
         case TD(CT_E_HASH):
@@ -158,8 +150,94 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TD(CT_COMMA_RBRC):
         case TD(CT_DOT_LCBR):
         case TD(CT_SLASH_RCBR):
+        case TD(CT_MINUS_UNDS):
+        case TD (CT_QUOT_DQT):
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(2,KC_SPC):
+            return 0;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(2, KC_SPC):
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(2, KC_SPC):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+	[0] = LAYOUT(KC_ESC, TD(CT_Q_EXLM), TD(CT_W_AT), TD(CT_E_HASH), TD(CT_R_DLR), TD(CT_T_PERC), TD(CT_Y_CIRC), TD(CT_U_AMPR), TD(CT_I_ASTR), TD(CT_O_LPRN), TD(CT_P_RPRN), KC_BSPC, LCTL_T(KC_TAB), TD(CT_A_1), TD(CT_S_2), TD(CT_D_3), TD(CT_F_4), TD(CT_G_5), TD(CT_H_6), TD(CT_J_7), TD(CT_K_8), TD(CT_L_9), TD(CT_SCLN_0), KC_ENT, KC_LSFT, TD(CT_Z_PLUS), TD(CT_X_MINUS), TD(CT_C_SLASH), TD(CT_V_ASTR), TD(CT_B_EQUAL), TD(CT_N_PERC), TD(CT_M_LBRC), TD(CT_COMMA_RBRC), TD(CT_DOT_LCBR), TD(CT_SLASH_RCBR), KC_NUBS, KC_LCTL, KC_LGUI, KC_LALT, LSFT_T(KC_ENT), LT(2,KC_SPC), MO(3), MO(4), DF(1), KC_NUHS),
+    [1] = LAYOUT( /* Simple base */
+		KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+		KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+		KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
+		KC_LCTL, KC_LGUI, KC_LALT,     KC_SPC, KC_SPC, MO(3), MO(4), DF(0), KC_QUOT),
+	[2] = LAYOUT(KC_ESC, KC_NO, KC_BTN1, KC_MS_U, KC_BTN2, KC_NO, KC_NO, KC_DEL, KC_UP, KC_BSPC, TD(CT_MINUS_UNDS), KC_DEL, LCTL_T(KC_GRV), KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_LCTL, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END, TD(CT_QUOT_DQT), KC_LSFT, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_NO, KC_NO, KC_PGUP, KC_PGDN, KC_DEL, KC_UP, KC_BSPC, KC_LCTL, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_LEFT, KC_DOWN, KC_RGHT),
+	[3] = LAYOUT(KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UNDS, KC_UNDS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+	[4] = LAYOUT(RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G, RGB_M_T, RGB_RMOD, RGB_MOD, RGB_TOG, BL_TOGG, BL_STEP, BL_BRTG, BL_ON, BL_OFF, BL_UP, BL_DOWN, KC_NO, KC_NO, RGB_SPD, RGB_SPI, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_HUD, RGB_HUI, RGB_VAD, RGB_VAI, KC_VOLU, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_VOLD)
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    tap_dance_action_t *action;
+
+    switch (keycode) {
+        case TD(CT_A_1):  // list all tap dance keycodes with tap-hold configurations
+        case TD(CT_S_2):
+        case TD(CT_D_3):
+        case TD(CT_F_4):
+        case TD(CT_G_5):
+        case TD(CT_H_6):
+        case TD(CT_J_7):
+        case TD(CT_K_8):
+        case TD(CT_L_9):
+        case TD(CT_SCLN_0):
+        case TD(CT_Q_EXLM):
+        case TD(CT_W_AT):
+        case TD(CT_E_HASH):
+        case TD(CT_R_DLR):
+        case TD(CT_T_PERC):
+        case TD(CT_Y_CIRC):
+        case TD(CT_U_AMPR):
+        case TD(CT_I_ASTR):
+        case TD(CT_O_LPRN):
+        case TD(CT_P_RPRN):
+        case TD(CT_Z_PLUS):
+        case TD(CT_X_MINUS):
+        case TD(CT_C_SLASH):
+        case TD(CT_V_ASTR):
+        case TD(CT_B_EQUAL):
+        case TD(CT_N_PERC):
+        case TD(CT_M_LBRC):
+        case TD(CT_COMMA_RBRC):
+        case TD(CT_DOT_LCBR):
+        case TD(CT_SLASH_RCBR):
+        case TD(CT_MINUS_UNDS):
+        case TD (CT_QUOT_DQT):
 
             action = &tap_dance_actions[TD_INDEX(keycode)];
+
             if (!record->event.pressed && action->state.count && !action->state.finished) {
                 tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
                 tap_code16(tap_hold->tap);
