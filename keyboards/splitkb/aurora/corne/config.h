@@ -20,3 +20,7 @@
 #ifdef OLED_ENABLE
 #   define OLED_FONT_H "keyboards/splitkb/aurora/corne/glcdfont.c"
 #endif
+
+
+#define TAPPING_TOGGLE 1
+#define COMBO_ONLY_FROM_LAYER 4

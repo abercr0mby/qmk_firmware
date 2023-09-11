@@ -16,3 +16,4 @@
 DEFAULT_FOLDER = splitkb/aurora/corne/rev1
 # Convert from Elite-C to Liatris
 CONVERT_TO=liatris
+COMBO_ENABLE = yes
