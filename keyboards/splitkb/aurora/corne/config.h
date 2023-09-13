@@ -22,7 +22,7 @@
 #endif
 
 
-#define TAPPING_TOGGLE 1
+#define TAPPING_TOGGLE 2
 #define COMBO_ONLY_FROM_LAYER 4
 
 
