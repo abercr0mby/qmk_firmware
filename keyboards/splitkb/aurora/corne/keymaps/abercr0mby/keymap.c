@@ -29,50 +29,17 @@ void keyboard_pre_init_user(void) {
 } */
 
 
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        //case LCTL_T(KC_SPC):
-        //case LSFT_T(KC_BSPC):
-            //return 0;
-        default:
-            return QUICK_TAP_TERM;
-    }
-}
-
-bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) { //if no keypress follows it counts as a tap even if held long enough
-    switch (keycode) {
-        //case LCTL_T(KC_SPC):
-        //case LSFT_T(KC_BSPC):
-            return true;
-        default:
-            return false;
-    }
-}
-
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        //case LCTL_T(KC_SPC):
-        //case LSFT_T(KC_BSPC):
-            // Immediately select the hold action when another key is pressed.
-            return true;
-        default:
-            // Do not select the hold action when another key is pressed.
-            return false;
-    }
-}
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_DEFAULT] = LAYOUT_split_3x6_3(
-        KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
-        KC_NO, KC_A, KC_S, KC_D, KC_F, KC_G,                                KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
-        KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B,                                KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-        TT(_SYMBOL), LSFT_T(KC_BSPC), LCTL_T(KC_TAB), KC_ENT, LCTL_T(KC_SPC), TT(_NAV)),
+        KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                    KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
+        KC_NO, KC_A, LSFT_T(KC_S), LCTL_T(KC_D), LALT_T(KC_F), LGUI_T(KC_G),    KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
+        KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B,                                    KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+        TT(_SYMBOL), LSFT_T(KC_BSPC), LCTL_T(KC_TAB), KC_ENT, KC_SPC, TT(_NAV)),
 
 	[_ADJUST] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                       KC_NUHS, KC_HASH, KC_DLR, KC_CIRC, KC_AMPR, KC_TRNS,
-        KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,                       KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS,  KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS,                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                           KC_NUHS, KC_HASH, KC_DLR, KC_CIRC, KC_AMPR, KC_TRNS,
+        KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,                           KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS,  KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         TO(_DEFAULT),  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_MOUSE)),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
@@ -83,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NAV] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_PGUP, KC_MS_BTN1, KC_UP, KC_MS_BTN2, LCTL(LALT(KC_DEL)), KC_TRNS,
-        KC_TRNS, LCTL(KC_A), KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL,           KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END, KC_TRNS,
+        KC_TRNS, LCTL(KC_A), KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,            KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END, KC_TRNS,
         KC_TRNS, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_TRNS,   KC_PGDN, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         TO(_SYMBOL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_DEFAULT)),
 
@@ -92,7 +59,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         TO(_DEFAULT), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_DEFAULT)),
-
 
  	[_REFERENCE] = LAYOUT_split_3x6_3(
         KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,  /*Use to allow combos to use same keys and apply to all layers even if keys different*/
@@ -106,7 +72,7 @@ const uint16_t PROGMEM default_layer[] = {KC_F2, KC_F11, COMBO_END};
 const uint16_t PROGMEM qw_esc[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM f_bkspc_del[] = {KC_F, KC_F2, COMBO_END};
 //const uint16_t PROGMEM j_ctrl_shift[] = {KC_J, KC_F11, COMBO_END};
-//const uint16_t PROGMEM m_comm_alt[] = {KC_M, KC_COMM, COMBO_END};
+//const uint16_t PROGMalt[] = {KC_M, KC_COMM, COMBO_END};
 //const uint16_t PROGMEM jk_win[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
@@ -125,6 +91,52 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+
+        case LSFT_T(KC_S):
+        case LCTL_T(KC_D):
+        case LALT_T(KC_F):
+        case LGUI_T(KC_G):
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LSFT_T(KC_BSPC):
+        case TT(_SYMBOL):
+        case TT(_NAV):
+        case LCTL_T(KC_TAB):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TT(_NAV):
+        case TT(_SYMBOL):
+            return 0;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+
+/* bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) { //if no keypress follows it counts as a tap even if held long enough
+    switch (keycode) {
+        case LCTL_T(KC_SPC):
+        //case LSFT_T(KC_BSPC):
+            return true;
+        default:
+            return false;
+    }
+} */
 
 
 
