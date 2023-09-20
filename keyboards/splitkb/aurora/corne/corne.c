@@ -23,6 +23,7 @@ enum layers {
   _NAV,
   _ADJUST,
   _MOUSE,
+  _GAME,
   _REFERENCE
 
 };

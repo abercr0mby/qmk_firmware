@@ -23,7 +23,7 @@
 
 
 #define TAPPING_TOGGLE 2
-#define COMBO_ONLY_FROM_LAYER 5
+#define COMBO_ONLY_FROM_LAYER 6
 
 
 #define TAPPING_TERM 200

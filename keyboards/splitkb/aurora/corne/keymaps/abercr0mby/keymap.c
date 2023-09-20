@@ -13,6 +13,7 @@ enum layers {
   _NAV,
   _ADJUST,
   _MOUSE,
+  _GAME,
   _REFERENCE
 };
 
@@ -34,43 +35,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                    KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
         KC_NO, KC_A, LSFT_T(KC_S), LCTL_T(KC_D), LALT_T(KC_F), LGUI_T(KC_G),    KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
         KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B,                                    KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-        TT(_SYMBOL), LSFT_T(KC_BSPC), LCTL_T(KC_TAB), KC_ENT, KC_SPC, TT(_NAV)),
+        LCTL_T(KC_TAB), TT(_SYMBOL), LSFT_T(KC_BSPC), LCTL_T(KC_SPC), TT(_NAV), KC_ENT),
 
 	[_ADJUST] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                           KC_NUHS, KC_HASH, KC_DLR, KC_CIRC, KC_AMPR, KC_TRNS,
         KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,                           KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS,  KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        TO(_DEFAULT),  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_MOUSE)),
+        KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_MOUSE), KC_TRNS),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_MINUS,                       KC_LPRN, KC_RPRN, KC_EXLM, KC_AT, KC_UNDS, KC_TRNS,
         KC_TRNS, KC_SLASH, KC_4, KC_5, KC_6, KC_ASTR,                       KC_LCBR, KC_RCBR, KC_PERC, KC_SCLN, KC_COLN, KC_TRNS,
         KC_TRNS, KC_EQUAL, KC_7, KC_8, KC_9, KC_0,                          KC_LBRC, KC_RBRC, KC_TRNS, KC_TRNS, KC_NUBS, KC_TRNS,
-        TO(_DEFAULT), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_NAV)),
+        KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_NAV), KC_TRNS),
 
 	[_NAV] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_PGUP, KC_MS_BTN1, KC_UP, KC_MS_BTN2, LCTL(LALT(KC_DEL)), KC_TRNS,
         KC_TRNS, LCTL(KC_A), KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,            KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END, KC_TRNS,
         KC_TRNS, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_TRNS,   KC_PGDN, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        TO(_SYMBOL), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_DEFAULT)),
+        KC_TRNS,  TO(_SYMBOL), KC_TRNS, KC_TRNS, TO(_DEFAULT), KC_TRNS),
 
     [_MOUSE] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_BTN1, KC_MS_U, KC_BTN2, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        TO(_DEFAULT), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_DEFAULT)),
+        KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_GAME), KC_TRNS),
+
+    [_GAME] = LAYOUT_split_3x6_3(
+        KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                     KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_Q, KC_W, KC_E, KC_R,         KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_LSFT, KC_A, KC_S, KC_D, KC_F,               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TAB, KC_LCTL, KC_SPC,     KC_LALT, TO(_DEFAULT), KC_TRNS),
 
  	[_REFERENCE] = LAYOUT_split_3x6_3(
         KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,  /*Use to allow combos to use same keys and apply to all layers even if keys different*/
         KC_NO, KC_A, KC_S, KC_D, KC_F, KC_G,                                KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
         KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B,                                KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-        KC_F1, KC_F2, KC_F3, LALT_T(KC_SPC), KC_F11, KC_F10)
+        KC_F1, KC_F2, KC_F3, KC_F12, KC_F11, KC_F10)
 };
 
-const uint16_t PROGMEM adjust_layer[] = {KC_F1, KC_F10, COMBO_END};
-const uint16_t PROGMEM default_layer[] = {KC_F2, KC_F11, COMBO_END};
+const uint16_t PROGMEM adjust_layer[] = {KC_F2, KC_F11, COMBO_END};
+const uint16_t PROGMEM default_layer[] = {KC_F3, KC_F12, COMBO_END};
 const uint16_t PROGMEM qw_esc[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM f_bkspc_del[] = {KC_F, KC_F2, COMBO_END};
+const uint16_t PROGMEM f_bkspc_del[] = {KC_F, KC_F3, COMBO_END};
 //const uint16_t PROGMEM j_ctrl_shift[] = {KC_J, KC_F11, COMBO_END};
 //const uint16_t PROGMalt[] = {KC_M, KC_COMM, COMBO_END};
 //const uint16_t PROGMEM jk_win[] = {KC_J, KC_K, COMBO_END};
