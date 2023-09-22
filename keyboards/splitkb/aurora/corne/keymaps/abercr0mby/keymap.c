@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T,                                    KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO,
         KC_NO, KC_A, LSFT_T(KC_S), LCTL_T(KC_D), LALT_T(KC_F), LGUI_T(KC_G),    KC_H, KC_J, KC_K, KC_L, KC_QUOT, KC_NO,
         KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B,                                    KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-        LCTL_T(KC_TAB), TT(_SYMBOL), LSFT_T(KC_BSPC), LCTL_T(KC_SPC), TT(_NAV), KC_ENT),
+        LCTL_T(KC_TAB), TT(_SYMBOL), LSFT_T(KC_BSPC), KC_SPC, TT(_NAV), KC_ENT),
 
 	[_ADJUST] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                           KC_NUHS, KC_HASH, KC_DLR, KC_CIRC, KC_AMPR, KC_TRNS,
@@ -44,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_MOUSE), KC_TRNS),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_MINUS,                       KC_LPRN, KC_RPRN, KC_EXLM, KC_AT, KC_UNDS, KC_TRNS,
-        KC_TRNS, KC_SLASH, KC_4, KC_5, KC_6, KC_ASTR,                       KC_LCBR, KC_RCBR, KC_PERC, KC_SCLN, KC_COLN, KC_TRNS,
-        KC_TRNS, KC_EQUAL, KC_7, KC_8, KC_9, KC_0,                          KC_LBRC, KC_RBRC, KC_TRNS, KC_TRNS, KC_NUBS, KC_TRNS,
+        KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_MINUS,                                   KC_LPRN, KC_RPRN, KC_EXLM, KC_AT, KC_UNDS, KC_TRNS,
+        KC_TRNS, KC_SLASH, LSFT_T(KC_4), LCTL_T(KC_5), LALT_T(KC_6), LGUI_T(KC_ASTR),   KC_LCBR, KC_RCBR, KC_PERC, KC_SCLN, KC_COLN, KC_TRNS,
+        KC_TRNS, KC_EQUAL, KC_7, KC_8, KC_9, KC_0,                                      KC_LBRC, KC_RBRC, KC_TRNS, KC_TRNS, KC_NUBS, KC_TRNS,
         KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_NAV), KC_TRNS),
 
 	[_NAV] = LAYOUT_split_3x6_3(
@@ -78,18 +78,12 @@ const uint16_t PROGMEM adjust_layer[] = {KC_F2, KC_F11, COMBO_END};
 const uint16_t PROGMEM default_layer[] = {KC_F3, KC_F12, COMBO_END};
 const uint16_t PROGMEM qw_esc[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM f_bkspc_del[] = {KC_F, KC_F3, COMBO_END};
-//const uint16_t PROGMEM j_ctrl_shift[] = {KC_J, KC_F11, COMBO_END};
-//const uint16_t PROGMalt[] = {KC_M, KC_COMM, COMBO_END};
-//const uint16_t PROGMEM jk_win[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(adjust_layer, TO(_ADJUST)),
     COMBO(default_layer, TO(_DEFAULT)),
     COMBO(qw_esc,  KC_ESC),
-    COMBO(f_bkspc_del,  KC_DEL),
-    //COMBO(f_shift_ctrl,  KC_LCTL)
-    //COMBO(m_comm_alt,  KC_LALT),
-    //COMBO(jk_win,  KC_LGUI)
+    COMBO(f_bkspc_del,  KC_DEL)
 };
 
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
@@ -105,7 +99,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LCTL_T(KC_D):
         case LALT_T(KC_F):
         case LGUI_T(KC_G):
-            return TAPPING_TERM + 50;
+            return TAPPING_TERM + 100;
         default:
             return TAPPING_TERM;
     }
