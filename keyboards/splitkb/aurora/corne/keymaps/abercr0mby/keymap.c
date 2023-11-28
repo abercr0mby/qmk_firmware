@@ -38,15 +38,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LCTL_T(KC_TAB), TT(_SYMBOL), LSFT_T(KC_BSPC), KC_SPC, TT(_NAV), KC_ENT),
 
 	[_ADJUST] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                                   KC_NUHS, KC_HASH, KC_DLR, KC_CIRC, KC_AMPR, KC_TRNS,
-        KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,                                   KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_LALT,                                   KC_NUHS, KC_HASH, KC_GRV, KC_CIRC, KC_PIPE, KC_TRNS,
+        KC_TRNS, KC_F5, KC_F6, KC_F7, KC_F8, KC_TRNS,                                   LSFT(KC_NUBS), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
         KC_TRNS,  KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS,                               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_MOUSE), KC_TRNS),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_MINUS,                                   KC_LPRN, KC_RPRN, KC_EXLM, KC_AT, KC_UNDS, KC_TRNS,
-        KC_TRNS, KC_SLASH, LSFT_T(KC_4), LCTL_T(KC_5), LALT_T(KC_6), KC_ASTR,           KC_LCBR, KC_RCBR, KC_PERC, KC_SCLN, KC_COLN, KC_TRNS,
-        KC_TRNS, KC_EQUAL, KC_7, KC_8, KC_9, KC_0,                                      KC_LBRC, KC_RBRC, KC_TRNS, KC_TRNS, KC_NUBS, KC_TRNS,
+        KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_MINUS,                                   ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN), KC_DLR, KC_EXLM, KC_AT, KC_UNDS, KC_TRNS,
+        KC_TRNS, KC_SLASH, LSFT_T(KC_4), LCTL_T(KC_5), LALT_T(KC_6), KC_ASTR,           ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR), KC_AMPR, KC_PERC, KC_SCLN, KC_COLN, KC_TRNS,
+        KC_TRNS, KC_EQUAL, KC_7, KC_8, KC_9, KC_0,                                      ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC), KC_TRNS, KC_TRNS, KC_TRNS, KC_NUBS, KC_TRNS,
         KC_TRNS, TO(_DEFAULT), KC_TRNS, KC_TRNS, TO(_NAV), KC_TRNS),
 
 	[_NAV] = LAYOUT_split_3x6_3(
