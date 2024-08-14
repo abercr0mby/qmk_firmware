@@ -19,13 +19,11 @@
 // The first four layers gets a name for readability, which is then used in the OLED below.
 enum layers {
   _DEFAULT,
+  _ADJUST,
+  _NUM,
   _SYMBOL,
   _NAV,
-  _ADJUST,
-  _MOUSE,
-  _GAME,
   _REFERENCE
-
 };
 
 #ifdef OLED_ENABLE
@@ -220,7 +218,10 @@ static void render_layer_state(void) {
         oled_write_P(lower_layer, false);
     } else if(layer_state_is(_NAV)) {
         oled_write_P(raise_layer, false);
-    } else if(layer_state_is(_DEFAULT)) {
+    } else if(layer_state_is(_NUM)) {
+        oled_write_P(lower_layer, false);
+    }
+    else if(layer_state_is(_DEFAULT)) {
         oled_write_P(default_layer, false);
     } else {
         oled_write_P(adjust_layer, false);
