@@ -39,7 +39,9 @@ enum tap_dances{
   TD_COLN,
   TD_SLASH,
   TD_CURR,
-  TD_AT
+  TD_AT,
+  TD_AMP,
+  TD_DATE
 };
 
 tap_dance_action_t tap_dance_actions[] = {
@@ -53,7 +55,9 @@ tap_dance_action_t tap_dance_actions[] = {
   [TD_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_SCLN),
   [TD_SLASH] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_NUBS),
   [TD_CURR] = ACTION_TAP_DANCE_DOUBLE(KC_HASH, KC_DLR),
-  [TD_AT] = ACTION_TAP_DANCE_DOUBLE(KC_DQUO, KC_NUHS)
+  [TD_AT] = ACTION_TAP_DANCE_DOUBLE(KC_DQUO, KC_NUHS),
+  [TD_AMP] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, LSFT(KC_NUBS)),
+  [TD_DATE] = ACTION_TAP_DANCE_DOUBLE(KC_SLASH, KC_COLN)
 };
 
 
@@ -72,14 +76,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUM] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_PLUS, KC_7, KC_8, KC_9, KC_MINUS,                                   TD(TD_PAR), TD(TD_AB), TD(TD_EXLM), TD(TD_COLN), TD(TD_UNDS), KC_TRNS,
-        KC_TRNS, KC_SLASH, KC_4, KC_5, KC_6, KC_ASTR,                                   TD(TD_BRC), KC_RALT, KC_RCTL, KC_LSFT, KC_RGUI, KC_TRNS,
+        KC_TRNS, TD(TD_DATE), KC_4, KC_5, KC_6, KC_ASTR,                                   TD(TD_BRC), KC_RALT, KC_RCTL, KC_LSFT, KC_RGUI, KC_TRNS,
         KC_TRNS, KC_0, KC_1, KC_2, KC_3, KC_EQUAL,                                      TD(TD_BKT), KC_AMPR, KC_COMM, KC_DOT, TD(TD_SLASH), KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,                                                      KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_PLUS, KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_MINUS,                     TD(TD_PAR), TD(TD_AB), TD(TD_EXLM), TD(TD_COLN), TD(TD_UNDS), KC_TRNS,
-        KC_TRNS, LGUI_T(KC_SLASH), KC_LSFT, KC_LCTL, KC_LALT, KC_ASTR,                  TD(TD_BRC), TD(TD_CURR), KC_PERC, TD(TD_AT), TD(TD_QUOT), KC_TRNS,
-        KC_TRNS, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_EQUAL,              TD(TD_BKT), KC_AMPR, KC_COMM, KC_DOT, TD(TD_SLASH), KC_TRNS,
+        KC_TRNS, KC_PLUS, KC_GRV, KC_PIPE, LSFT(KC_NUBS), KC_MINUS,                     TD(TD_PAR), TD(TD_AB), TD(TD_EXLM), TD(TD_QUOT), TD(TD_UNDS), KC_TRNS,
+        KC_TRNS, LGUI_T(KC_SLASH), KC_LSFT, KC_LCTL, KC_LALT, KC_ASTR,                  TD(TD_BRC), TD(TD_CURR), KC_PERC, TD(TD_COLN), TD(TD_AT), KC_TRNS,
+        KC_TRNS, LCTL(KC_Z), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_EQUAL,              TD(TD_BKT), TD(TD_AMP), KC_COMM, KC_DOT, TD(TD_SLASH), KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,                                                      KC_TRNS, KC_TRNS, KC_TRNS),
 
 	[_NAV] = LAYOUT_split_3x6_3(
