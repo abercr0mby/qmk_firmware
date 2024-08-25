@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NUM] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_PLUS, KC_7, KC_8, KC_9, KC_MINUS,                                   TD(TD_PAR), TD(TD_AB), TD(TD_EXLM), TD(TD_AT), TD(TD_UNDS), KC_TRNS,
         KC_TRNS, TD(TD_DATE), KC_4, KC_5, KC_6, KC_ASTR,                                   TD(TD_BRC), KC_RALT, KC_RCTL, KC_LSFT, KC_RGUI, KC_TRNS,
-        KC_TRNS, KC_0, KC_1, KC_2, KC_3, KC_EQUAL,                                      TD(TD_BKT), KC_AMPR, KC_COMM, KC_DOT, TD(TD_SLASH), KC_TRNS,
+        KC_TRNS, KC_0, KC_1, KC_2, KC_3, KC_EQUAL,                                      TD(TD_BKT), TD(TD_AMP), KC_COMM, KC_DOT, TD(TD_SLASH), KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,                                                      KC_TRNS, KC_TRNS, KC_TRNS),
 
     [_SYMBOL] = LAYOUT_split_3x6_3(
